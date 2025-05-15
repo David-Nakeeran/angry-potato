@@ -16,6 +16,7 @@ let cookieData = JSON.parse(localStorage.getItem("cookieGameData")) || {
 const incrementTotalCookies = () => {
   cookieData.totalCookies += cookieData.cookiesPerSec;
   totalCookiesDisplay.textContent = `${cookieData.totalCookies}`;
+  displayCookiesPerSec();
   localStorage.setItem("cookieGameData", JSON.stringify(cookieData));
 };
 
@@ -41,3 +42,8 @@ setInterval(incrementTotalCookies, 1000);
 // Event listeners
 incrementCookieBtn.addEventListener("click", incrementBtnHandler);
 resetBtn.addEventListener("click", resetBtnHandler);
+
+// Display cookies per second
+const displayCookiesPerSec = () => {
+  cookiesPerSec.textContent = `${cookieData.cookiesPerSec}`;
+};
