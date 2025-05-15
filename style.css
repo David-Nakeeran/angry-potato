@@ -32,11 +32,13 @@ h1 {
 p {
   margin-bottom: 0.75rem;
 }
-
 .cookie-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.cookie-btn-container {
 }
 
 .cookie-info {
@@ -74,5 +76,10 @@ p {
 
 /* Buttons */
 .cookie-increment-btn {
-  font-size: 15rem;
+  border: none;
+  background: none;
+}
+
+.button-img {
+  max-width: 200px;
 }
