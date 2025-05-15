@@ -22,7 +22,7 @@ const saveGameState = () => {
 // Callback for setInterval
 const incrementTotalCookies = () => {
   cookieData.totalCookies += cookieData.cookiesPerSec;
-  totalCookiesDisplay.textContent = `${cookieData.totalCookies}`;
+  totalCookiesDisplay.textContent = `Total Cookies: ${cookieData.totalCookies}`;
   displayCookiesPerSec();
   saveGameState();
 };
@@ -31,7 +31,7 @@ const incrementTotalCookies = () => {
 const incrementBtnHandler = () => {
   cookieData.totalCookies += cookieData.cookieClickValue;
   saveGameState();
-  totalCookiesDisplay.textContent = `Total Cookies: ${cookieData.totalCookies}`;
+  totalCookiesDisplay.textContent = `${cookieData.totalCookies}`;
 };
 
 // Callback for resetBtn event listener
@@ -68,6 +68,7 @@ const upgrades = await getData();
 // Loop through fetched data, create upgrade elements
 upgrades.forEach((element, index) => {
   const div = document.createElement("div");
+  div.setAttribute("class", "upgrade-container");
   upgradesContainer.appendChild(div);
   const namePara = document.createElement("p");
   const costPara = document.createElement("p");
