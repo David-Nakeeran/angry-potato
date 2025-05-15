@@ -3,3 +3,67 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Hex codes: #272727, #747474, #FF652F*/
+/* maybe codes: #FFE400, #14A76C */
+
+body {
+  font-family: "Sora", sans-serif;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  background-color: #272727;
+  color: #747474;
+}
+
+header,
+main,
+footer {
+  text-align: center;
+  min-width: 90dvw;
+}
+
+/* Typography */
+h1 {
+  margin-bottom: 2.5rem;
+}
+
+.cookie-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cookie-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 200px; /* temp */
+}
+
+.upgrade-container {
+  border: 1px solid #ff652f;
+  border-radius: 6px;
+  margin-bottom: 2em;
+  padding: 0.75em;
+}
+
+.upgrade-container p {
+  font-size: 1.2rem;
+}
+
+.upgrade-container button {
+  color: #ffe400;
+  font-size: 1.1rem;
+  background: none;
+  cursor: pointer;
+  border: 1px solid #ff652f;
+  padding: 0.75em;
+  border-radius: 6px;
+}
+
+/* Buttons */
+.cookie-increment-btn {
+  font-size: 15rem;
+}
