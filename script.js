@@ -76,11 +76,12 @@ upgrades.forEach((element, index) => {
   const buyBtn = document.createElement("button");
 
   buyBtn.setAttribute("data-index", index);
+  buyBtn.classList.add("buy-btn");
   div.setAttribute("id", element.id);
 
-  namePara.textContent = element.name;
-  costPara.textContent = element.cost;
-  cookieValueUpgrade.textContent = element.increase;
+  namePara.textContent = `${element.name}`;
+  costPara.textContent = `Cost ${element.cost} Cookies`;
+  cookieValueUpgrade.textContent = `Increases CPS by ${element.increase}`;
   buyBtn.textContent = "Buy upgrade";
 
   div.append(namePara, costPara, cookieValueUpgrade, buyBtn);
