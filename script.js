@@ -31,7 +31,7 @@ const incrementTotalCookies = () => {
 const incrementBtnHandler = () => {
   cookieData.totalCookies += cookieData.cookieClickValue;
   saveGameState();
-  totalCookiesDisplay.textContent = `${cookieData.totalCookies}`;
+  totalCookiesDisplay.textContent = `Total Cookies: ${cookieData.totalCookies}`;
 };
 
 // Callback for resetBtn event listener
