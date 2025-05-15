@@ -6,7 +6,7 @@ const cookiesPerSec = document.getElementById("cps");
 
 // Get data from local storage, if null create cookiedata object
 let cookieData = JSON.parse(localStorage.getItem("cookieGameData")) || {
-  totalCookies: 1,
+  totalCookies: 0,
   cookieClickValue: 1,
   cookiesPerSec: 1,
 };
@@ -25,9 +25,19 @@ const incrementBtnHandler = () => {
   totalCookiesDisplay.textContent = `${cookieData.totalCookies}`;
 };
 
+// Callback for resetBtn event listener
+const resetBtnHandler = () => {
+  localStorage.clear();
+  cookieData = {
+    totalCookies: 0,
+    cookieClickValue: 1,
+    cookiesPerSec: 1,
+  };
+};
+
 // Set Interval
 setInterval(incrementTotalCookies, 1000);
 
 // Event listeners
-
 incrementCookieBtn.addEventListener("click", incrementBtnHandler);
+resetBtn.addEventListener("click", resetBtnHandler);
