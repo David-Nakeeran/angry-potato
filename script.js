@@ -68,7 +68,7 @@ const upgrades = await getData();
 // Loop through fetched data, create upgrade elements
 upgrades.forEach((element, index) => {
   const div = document.createElement("div");
-  div.setAttribute("class", "upgrade-container");
+  div.setAttribute("class", "upgrade-container hidden");
   upgradesContainer.appendChild(div);
   const namePara = document.createElement("p");
   const costPara = document.createElement("p");
