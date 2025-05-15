@@ -26,6 +26,7 @@ footer {
 
 /* Typography */
 h1 {
+  color: #14a76c;
   margin-bottom: 2.5rem;
 }
 
@@ -45,7 +46,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 200px;
+  min-width: 250px;
   margin-bottom: 0.75em;
 }
 
@@ -82,4 +83,26 @@ p {
 
 .button-img {
   max-width: 200px;
+}
+
+.reset {
+  color: #14a76c;
+  font-size: 1.1rem;
+  background: none;
+  cursor: pointer;
+  border: 1px solid #14a76c;
+  padding: 0.75em;
+  border-radius: 6px;
+}
+
+.reset:hover {
+  background-color: #454545;
+  color: #4c9f7e;
+  transform: translateY(-0.25em);
+}
+
+.upgrade-container button:hover {
+  color: #fdec5a;
+  background-color: #454545;
+  transform: translateY(-0.25em);
 }
