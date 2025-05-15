@@ -3,6 +3,8 @@ const resetBtn = document.getElementById("reset");
 const totalCookiesDisplay = document.getElementById("total-cookies");
 const incrementCookieBtn = document.getElementById("cookie-increment-btn");
 const cookiesPerSec = document.getElementById("cps");
+const upgradesContainer = document.getElementById("upgrades-container");
+const announcements = document.getElementById("announcements");
 
 // Get data from local storage, if null create cookiedata object
 let cookieData = JSON.parse(localStorage.getItem("cookieGameData")) || {
@@ -11,19 +13,25 @@ let cookieData = JSON.parse(localStorage.getItem("cookieGameData")) || {
   cookiesPerSec: 1,
 };
 
+// Save game state
+const saveGameState = () => {
+  localStorage.setItem("cookieGameData", JSON.stringify(cookieData));
+};
+
 // Callbacks
 // Callback for setInterval
 const incrementTotalCookies = () => {
   cookieData.totalCookies += cookieData.cookiesPerSec;
   totalCookiesDisplay.textContent = `${cookieData.totalCookies}`;
   displayCookiesPerSec();
-  localStorage.setItem("cookieGameData", JSON.stringify(cookieData));
+  saveGameState();
 };
 
 // Callback for incrementBtn event listener
 const incrementBtnHandler = () => {
   cookieData.totalCookies += cookieData.cookieClickValue;
-  totalCookiesDisplay.textContent = `${cookieData.totalCookies}`;
+  saveGameState();
+  totalCookiesDisplay.textContent = `Total Cookies: ${cookieData.totalCookies}`;
 };
 
 // Callback for resetBtn event listener
@@ -34,16 +42,69 @@ const resetBtnHandler = () => {
     cookieClickValue: 1,
     cookiesPerSec: 1,
   };
+  announcements.textContent = "";
 };
 
 // Set Interval
 setInterval(incrementTotalCookies, 1000);
 
+// Display cookies per second
+const displayCookiesPerSec = () => {
+  cookiesPerSec.textContent = `Cookies Per Sec: ${cookieData.cookiesPerSec}`;
+};
+
+// Fetch data from API
+const getData = async () => {
+  const url = "https://cookie-upgrade-api.vercel.app/api/upgrades";
+  try {
+    const response = await fetch(url);
+    return response.json();
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+const upgrades = await getData();
+
+// Loop through fetched data, create upgrade elements
+upgrades.forEach((element, index) => {
+  const div = document.createElement("div");
+  upgradesContainer.appendChild(div);
+  const namePara = document.createElement("p");
+  const costPara = document.createElement("p");
+  const cookieValueUpgrade = document.createElement("p");
+  const buyBtn = document.createElement("button");
+
+  buyBtn.setAttribute("data-index", index);
+  div.setAttribute("id", element.id);
+
+  namePara.textContent = element.name;
+  costPara.textContent = element.cost;
+  cookieValueUpgrade.textContent = element.increase;
+  buyBtn.textContent = "Buy upgrade";
+
+  div.append(namePara, costPara, cookieValueUpgrade, buyBtn);
+});
+
+const buyUpgrade = () => {
+  const buyBtns = document.querySelectorAll("[data-index]");
+  buyBtns.forEach((element) => {
+    element.addEventListener("click", (e) => {
+      const { name, cost, increase } = upgrades[element.dataset.index];
+      if (cookieData.totalCookies < cost) {
+        announcements.textContent =
+          "You do not have enough cookies, to buy this upgrade....work harder!";
+      } else {
+        announcements.textContent = `You have activated ${name}`;
+        cookieData.totalCookies -= cost;
+        cookieData.cookieClickValue += increase;
+        cookieData.cookiesPerSec += increase;
+        saveGameState();
+      }
+    });
+  });
+};
+buyUpgrade();
+
 // Event listeners
 incrementCookieBtn.addEventListener("click", incrementBtnHandler);
 resetBtn.addEventListener("click", resetBtnHandler);
-
-// Display cookies per second
-const displayCookiesPerSec = () => {
-  cookiesPerSec.textContent = `${cookieData.cookiesPerSec}`;
-};
