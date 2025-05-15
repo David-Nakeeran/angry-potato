@@ -29,6 +29,10 @@ h1 {
   margin-bottom: 2.5rem;
 }
 
+p {
+  margin-bottom: 0.75rem;
+}
+
 .cookie-container {
   display: flex;
   flex-direction: column;
@@ -39,7 +43,12 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 200px; /* temp */
+  min-width: 200px;
+  margin-bottom: 0.75em;
+}
+
+.cookie-info p {
+  margin-bottom: 0;
 }
 
 .upgrade-container {
