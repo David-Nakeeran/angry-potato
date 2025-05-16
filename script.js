@@ -48,9 +48,6 @@ const incrementBtnHandler = () => {
     console.log(cookieData.audioOn);
     audioPop.currentTime = 0;
     audioPop.play();
-  } else {
-    console.log(cookieData.audioOn);
-    audioPop.muted = true;
   }
 };
 
