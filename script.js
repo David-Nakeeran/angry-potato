@@ -3,8 +3,11 @@ const resetBtn = document.getElementById("reset");
 const totalCookiesDisplay = document.getElementById("total-cookies");
 const incrementCookieBtn = document.getElementById("cookie-increment-btn");
 const cookiesPerSec = document.getElementById("cps");
-const upgradesContainer = document.getElementById("upgrades-container");
+const upgradesWrapper = document.getElementById("upgrades-wrapper");
 const announcements = document.getElementById("announcements");
+const showCookieUpgrades = document.getElementById("cookie-upgrades-btn");
+const upgrade = document.getElementById("upgrade");
+const upgradeContainer = document.getElementById("upgrades-container");
 
 // Get data from local storage, if null create cookiedata object
 let cookieData = JSON.parse(localStorage.getItem("cookieGameData")) || {
@@ -45,6 +48,11 @@ const resetBtnHandler = () => {
   announcements.textContent = "";
 };
 
+// Callback show upgrades list
+const showUpgrades = () => {
+  upgradeContainer.classList.toggle("hidden");
+};
+
 // Set Interval
 setInterval(incrementTotalCookies, 1000);
 
@@ -68,8 +76,9 @@ const upgrades = await getData();
 // Loop through fetched data, create upgrade elements
 upgrades.forEach((element, index) => {
   const div = document.createElement("div");
-  div.setAttribute("class", "upgrade-container hidden");
-  upgradesContainer.appendChild(div);
+  div.setAttribute("class", "upgrade");
+  div.setAttribute("id", "upgrade");
+  upgradeContainer.appendChild(div);
   const namePara = document.createElement("p");
   const costPara = document.createElement("p");
   const cookieValueUpgrade = document.createElement("p");
@@ -110,3 +119,4 @@ buyUpgrade();
 // Event listeners
 incrementCookieBtn.addEventListener("click", incrementBtnHandler);
 resetBtn.addEventListener("click", resetBtnHandler);
+showCookieUpgrades.addEventListener("click", showUpgrades);
