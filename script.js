@@ -12,6 +12,9 @@ const audioBtn = document.getElementById("audio");
 const audioOn = document.getElementById("audio-on");
 const audioPop = document.getElementById("audio-pop");
 
+// Make annoucement disapear after set amount of time
+// fix bug with audio icon
+
 const i = document.createElement("i");
 i.classList = "fa-solid fa-volume-xmark";
 
