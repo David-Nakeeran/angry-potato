@@ -109,6 +109,12 @@ p {
 button {
   cursor: pointer;
 }
+
+.audio {
+  border: none;
+  background: none;
+}
+
 .cookie-increment-btn {
   border: none;
   background: none;
