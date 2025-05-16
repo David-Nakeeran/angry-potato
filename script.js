@@ -97,9 +97,14 @@ const getData = async () => {
   const url = "https://cookie-upgrade-api.vercel.app/api/upgrades";
   try {
     const response = await fetch(url);
+    if (!response.ok) {
+      console.error(`HTTP status code: ${response.status}`);
+    }
     return response.json();
   } catch (error) {
-    console.error(error.message);
+    console.error(
+      `Something went from with fetching data from the API: ${error.message}`
+    );
   }
 };
 const upgrades = await getData();
