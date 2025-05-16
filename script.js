@@ -28,6 +28,15 @@ const saveGameState = () => {
   localStorage.setItem("cookieGameData", JSON.stringify(cookieData));
 };
 
+// play audio
+const playAudio = () => {
+  if (cookieData.audioOn) {
+    console.log(cookieData.audioOn);
+    audioPop.currentTime = 0;
+    audioPop.play();
+  }
+};
+
 // Callbacks
 // Callback for setInterval
 const incrementTotalCookies = () => {
@@ -42,13 +51,7 @@ const incrementBtnHandler = () => {
   cookieData.totalCookies += cookieData.cookieClickValue;
   saveGameState();
   totalCookiesDisplay.textContent = `Total Cookies: ${cookieData.totalCookies}`;
-
-  // Put into audio function
-  if (cookieData.audioOn) {
-    console.log(cookieData.audioOn);
-    audioPop.currentTime = 0;
-    audioPop.play();
-  }
+  playAudio();
 };
 
 // Callback for resetBtn event listener
