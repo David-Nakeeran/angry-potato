@@ -8,6 +8,7 @@
 /* maybe codes: #FFE400, #14A76C */
 
 body {
+  height: 100dvh;
   font-family: "Sora", sans-serif;
   display: grid;
   grid-template-columns: 1fr;
@@ -54,18 +55,18 @@ p {
   margin-bottom: 0;
 }
 
-.upgrade-container {
+.upgrade {
   border: 1px solid #ff652f;
   border-radius: 6px;
   margin-bottom: 2em;
   padding: 0.75em;
 }
 
-.upgrade-container p {
+.upgrade p {
   font-size: 1.2rem;
 }
 
-.upgrade-container button {
+.upgrade button {
   color: #ffe400;
   font-size: 1.1rem;
   background: none;
@@ -75,12 +76,23 @@ p {
   border-radius: 6px;
 }
 
+.upgrades-btn-para-container {
+  border: 1px solid #ff652f;
+  border-radius: 6px;
+  padding: 0.75em;
+  margin-bottom: 0.75em;
+}
+
 .hidden {
   display: none;
 }
 
+.unhidden {
+  display: block;
+}
+
 .fa-square-caret-down {
-  color: #14a76c;
+  color: #ffe400;
   font-size: 3rem;
 }
 
@@ -112,7 +124,7 @@ button {
   transform: translateY(-0.25em);
 }
 
-.upgrade-container button:hover {
+.upgrade button:hover {
   color: #fdec5a;
   background-color: #454545;
   transform: translateY(-0.25em);
@@ -123,4 +135,8 @@ button {
   border: none;
   padding: 0;
   font-size: 1.5rem;
+}
+
+.cookie-upgrades-btn:hover {
+  transform: translateY(-0.1em);
 }
