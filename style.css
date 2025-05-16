@@ -18,6 +18,10 @@ body {
   color: #747474;
 }
 
+header {
+  margin-bottom: 2.5em;
+}
+
 header,
 main,
 footer {
@@ -27,6 +31,7 @@ footer {
 
 /* Typography */
 h1 {
+  padding: 0.5em;
   color: #14a76c;
   margin-bottom: 2.5rem;
 }
@@ -40,14 +45,16 @@ p {
   align-items: center;
 }
 
-.cookie-btn-container {
+.cookie-container p {
+  font-size: 1.2rem;
 }
 
 .cookie-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 250px;
+  width: 100%;
+  /* min-width: 350px; */
   margin-bottom: 0.75em;
 }
 
@@ -160,4 +167,31 @@ button {
 
 .cookie-upgrades-btn:hover {
   transform: translateY(-0.1em);
+}
+
+/* media queries */
+@media (min-width: 768px) {
+  .cookie-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cookie-btn-container {
+    grid-column: 2 / 3;
+    grid-row: 2 / -2;
+  }
+
+  .total-cookie {
+    grid-column: 1 / 2;
+    grid-row: 1 / 1;
+    align-self: end;
+  }
+
+  .cookie-info {
+    display: block;
+  }
+
+  .cookie-info p {
+    margin-bottom: 0.75em;
+  }
 }
