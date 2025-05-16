@@ -37,7 +37,6 @@ const playAudio = () => {
   }
 };
 
-// Callbacks
 // Callback for setInterval
 const incrementTotalCookies = () => {
   cookieData.totalCookies += cookieData.cookiesPerSec;
