@@ -56,10 +56,23 @@ p {
 }
 
 .upgrade {
+  animation-duration: 1.5s;
+  animation-name: slide-up;
   border: 1px solid #ff652f;
   border-radius: 6px;
   margin-bottom: 2em;
   padding: 0.75em;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(1000px);
+  }
+
+  to {
+    translate: 0 0;
+    scale: 100% 1;
+  }
 }
 
 .upgrade p {
@@ -85,10 +98,6 @@ p {
 
 .hidden {
   display: none;
-}
-
-.unhidden {
-  display: block;
 }
 
 .fa-square-caret-down {
