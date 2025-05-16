@@ -105,6 +105,12 @@ p {
   font-size: 3rem;
 }
 
+.fa-volume-high,
+.fa-volume-xmark {
+  color: #ffe400;
+  font-size: 1.5rem;
+}
+
 /* Buttons */
 button {
   cursor: pointer;
