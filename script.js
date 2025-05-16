@@ -8,12 +8,19 @@ const announcements = document.getElementById("announcements");
 const showCookieUpgrades = document.getElementById("cookie-upgrades-btn");
 const upgrade = document.getElementById("upgrade");
 const upgradeContainer = document.getElementById("upgrades-container");
+const audioBtn = document.getElementById("audio");
+const audioOn = document.getElementById("audio-on");
+const audioPop = document.getElementById("audio-pop");
+
+const i = document.createElement("i");
+i.classList = "fa-solid fa-volume-xmark";
 
 // Get data from local storage, if null create cookiedata object
 let cookieData = JSON.parse(localStorage.getItem("cookieGameData")) || {
   totalCookies: 0,
   cookieClickValue: 1,
   cookiesPerSec: 1,
+  audioOn: true,
 };
 
 // Save game state
@@ -35,6 +42,16 @@ const incrementBtnHandler = () => {
   cookieData.totalCookies += cookieData.cookieClickValue;
   saveGameState();
   totalCookiesDisplay.textContent = `Total Cookies: ${cookieData.totalCookies}`;
+
+  // Put into audio function
+  if (cookieData.audioOn) {
+    console.log(cookieData.audioOn);
+    audioPop.currentTime = 0;
+    audioPop.play();
+  } else {
+    console.log(cookieData.audioOn);
+    audioPop.muted = true;
+  }
 };
 
 // Callback for resetBtn event listener
@@ -51,6 +68,21 @@ const resetBtnHandler = () => {
 // Callback show upgrades list
 const showUpgrades = () => {
   upgradeContainer.classList.toggle("hidden");
+};
+
+// Callback handle audio
+const audioHandler = () => {
+  if (audioOn.parentElement === audioBtn) {
+    audioBtn.removeChild(audioOn);
+    audioBtn.appendChild(i);
+    cookieData.audioOn = false;
+    saveGameState();
+  } else {
+    audioBtn.removeChild(i);
+    audioBtn.appendChild(audioOn);
+    cookieData.audioOn = true;
+    saveGameState();
+  }
 };
 
 // Set Interval
@@ -117,6 +149,7 @@ const buyUpgrade = () => {
 buyUpgrade();
 
 // Event listeners
+audioBtn.addEventListener("click", audioHandler);
 incrementCookieBtn.addEventListener("click", incrementBtnHandler);
 resetBtn.addEventListener("click", resetBtnHandler);
 showCookieUpgrades.addEventListener("click", showUpgrades);
