@@ -189,9 +189,31 @@ button {
 
   .cookie-info {
     display: block;
+    margin-bottom: 0;
   }
 
   .cookie-info p {
-    margin-bottom: 0.75em;
+    margin-bottom: 1em;
+  }
+
+  .upgrades-btn-para-container {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+  }
+
+  .upgrade {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .upgrade button {
+    justify-self: center;
+    width: 20dvw;
+  }
+
+  .upgrade p {
+    align-self: center;
+    margin-bottom: 0;
   }
 }
