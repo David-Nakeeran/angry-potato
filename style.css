@@ -4,9 +4,6 @@
   box-sizing: border-box;
 }
 
-/* Hex codes: #272727, #747474, #FF652F*/
-/* maybe codes: #FFE400, #14A76C */
-
 body {
   height: 100dvh;
   font-family: "Sora", sans-serif;
@@ -31,22 +28,32 @@ footer {
 
 /* Typography */
 h1 {
+  font-weight: 800;
   color: #ff652f;
   padding: 0.5em;
   margin-bottom: 2.5rem;
+  text-transform: uppercase;
 }
 
 p {
   margin-bottom: 0.75rem;
 }
-.potatoe-container {
+
+.highlight {
+  color: #ff652f;
+}
+
+footer {
+  font-size: 0.75rem;
+}
+.potato-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.potatoe-container p {
-  font-size: 1.2rem;
+.potato-container p {
+  font-size: 1.3rem;
 }
 
 .potato-info {
@@ -54,7 +61,6 @@ p {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  /* min-width: 350px; */
   margin-bottom: 0.75em;
 }
 
@@ -103,8 +109,16 @@ p {
   margin-bottom: 0.75em;
 }
 
+.upgrades-btn-para-container {
+  font-size: 1.3rem;
+}
+
 .hidden {
   display: none;
+}
+
+.announcements {
+  max-width: 300px;
 }
 
 .fa-square-caret-down {
@@ -204,9 +218,13 @@ button {
     font-size: 1.3rem;
   }
 
+  .announcements {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
   .upgrades-btn-para-container {
     display: grid;
-    /* grid-template-columns: 1fr 1fr; */
   }
 
   .upgrade {
