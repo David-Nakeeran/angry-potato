@@ -14,7 +14,6 @@ const audioPop = document.getElementById("audio-pop");
 const potatoImg = document.getElementById("potato");
 
 let timeoutId;
-// fix bug with audio icon
 
 const i = document.createElement("i");
 i.classList = "fa-solid fa-volume-xmark";
@@ -27,6 +26,13 @@ let potatoData = JSON.parse(localStorage.getItem("potatoGameData")) || {
   audioOn: true,
 };
 
+const loadAudioIconPref = () => {
+  if (!potatoData.audioOn) {
+    audioBtn.removeChild(audioOn);
+    audioBtn.appendChild(i);
+  }
+};
+
 // Save game state
 const saveGameState = () => {
   localStorage.setItem("potatoGameData", JSON.stringify(potatoData));
@@ -35,7 +41,6 @@ const saveGameState = () => {
 // play audio
 const playAudio = () => {
   if (potatoData.audioOn) {
-    console.log(potatoData.audioOn);
     audioPop.currentTime = 0;
     audioPop.play();
   }
@@ -173,6 +178,7 @@ const buyUpgrade = () => {
     });
   });
 };
+loadAudioIconPref();
 buyUpgrade();
 
 // Event listeners
