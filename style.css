@@ -31,25 +31,25 @@ footer {
 
 /* Typography */
 h1 {
+  color: #ff652f;
   padding: 0.5em;
-  color: #14a76c;
   margin-bottom: 2.5rem;
 }
 
 p {
   margin-bottom: 0.75rem;
 }
-.cookie-container {
+.potatoe-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.cookie-container p {
+.potatoe-container p {
   font-size: 1.2rem;
 }
 
-.cookie-info {
+.potato-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,7 +58,7 @@ p {
   margin-bottom: 0.75em;
 }
 
-.cookie-info p {
+.potato-info p {
   margin-bottom: 0;
 }
 
@@ -128,7 +128,7 @@ button {
   background: none;
 }
 
-.cookie-increment-btn {
+.potato-increment-btn {
   border: none;
   background: none;
 }
@@ -138,62 +138,70 @@ button {
 }
 
 .reset {
-  color: #14a76c;
+  color: #ffe400;
   font-size: 1.1rem;
   background: none;
-  border: 1px solid #14a76c;
+  border: 1px solid #ff652f;
   padding: 0.75em;
   border-radius: 6px;
+  cursor: pointer;
 }
 
+.upgrade button:hover,
 .reset:hover {
-  background-color: #454545;
-  color: #4c9f7e;
-  transform: translateY(-0.25em);
-}
-
-.upgrade button:hover {
   color: #fdec5a;
   background-color: #454545;
   transform: translateY(-0.25em);
 }
 
-.cookie-upgrades-btn {
+.potato-upgrades-btn {
   background: none;
   border: none;
   padding: 0;
   font-size: 1.5rem;
 }
 
-.cookie-upgrades-btn:hover {
+.potato-upgrades-btn:hover {
   transform: translateY(-0.1em);
 }
 
 /* media queries */
 @media (min-width: 768px) {
-  .cookie-container {
+  h1 {
+    font-size: 2.5rem;
+  }
+  .potato-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
-  .cookie-btn-container {
+  .potato-btn-container {
     grid-column: 2 / 3;
     grid-row: 2 / -2;
   }
 
-  .total-cookie {
+  .total-potatoes {
     grid-column: 1 / 2;
-    grid-row: 1 / 1;
-    align-self: end;
+    align-self: center;
   }
 
-  .cookie-info {
+  .potato-info {
     display: block;
-    margin-bottom: 0;
+    margin-bottom: 1em;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    align-self: center;
   }
 
-  .cookie-info p {
+  .potato-info p {
     margin-bottom: 1em;
+  }
+
+  .potato-info p,
+  .total-potatoes,
+  .upgrades-btn-para-container,
+  .upgrade button {
+    font-size: 1.3rem;
   }
 
   .upgrades-btn-para-container {
@@ -215,5 +223,19 @@ button {
   .upgrade p {
     align-self: center;
     margin-bottom: 0;
+  }
+
+  .reset {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  main,
+  .potato-container,
+  .upgrades-wrapper {
+    margin: 0 auto;
+    min-width: none;
+    max-width: 1023px;
   }
 }
