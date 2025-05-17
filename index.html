@@ -18,44 +18,45 @@
     />
     <link rel="stylesheet" href="./style.css" />
     <script type="module" src="./script.js" defer></script>
-    <title>Cookie Clicker</title>
+    <title>Angry Potato Clicker</title>
   </head>
   <body>
     <audio id="audio-pop" src="./assets/audio/pop-39222.mp3"></audio>
     <header>
-      <h1>Cookie Clicker</h1>
+      <h1>Angry Potato</h1>
       <button id="audio" class="audio toggle-audio">
         <i id="audio-on" class="fa-solid fa-volume-high"></i>
       </button>
     </header>
     <main>
-      <section class="cookie-container">
-        <div class="total-cookies"><p id="total-cookies"></p></div>
-        <div class="cookie-btn-container">
-          <button id="cookie-increment-btn" class="cookie-increment-btn">
+      <section class="potato-container">
+        <div class="total-potatoes"><p id="total-potatoes"></p></div>
+        <div class="potato-btn-container">
+          <button id="potato-increment-btn" class="potato-increment-btn">
             <img
+              id="potato"
               class="button-img"
               src="./assets/images/angry-potatoe.png"
-              alt="cookie"
+              alt="angry potato"
             />
           </button>
         </div>
-        <div class="cookie-info">
-          <p id="cps"></p>
+        <div class="potato-info">
+          <p id="pps"></p>
           <button id="reset" class="reset">Reset</button>
         </div>
         <p id="announcements"></p>
       </section>
-      <section id="upgrades-wrapper">
+      <section id="upgrades-wrapper" class="upgrades-wrapper">
         <div class="upgrades-btn-para-container">
-          <p>Cookie Upgrades</p>
-          <button id="cookie-upgrades-btn" class="cookie-upgrades-btn">
+          <p>Potato Upgrades</p>
+          <button id="potato-upgrades-btn" class="potato-upgrades-btn">
             <i class="fa-regular fa-square-caret-down"></i>
           </button>
         </div>
         <div id="upgrades-container" class="hidden"></div>
       </section>
     </main>
-    <footer><p>Cookie Clicker 2025 ©</p></footer>
+    <footer><p>Angry Potato 2025 ©</p></footer>
   </body>
 </html>
