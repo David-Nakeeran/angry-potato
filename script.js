@@ -1,68 +1,79 @@
 // dom elements
 const resetBtn = document.getElementById("reset");
-const totalCookiesDisplay = document.getElementById("total-cookies");
-const incrementCookieBtn = document.getElementById("cookie-increment-btn");
-const cookiesPerSec = document.getElementById("cps");
+const totalPotatoesDisplay = document.getElementById("total-potatoes");
+const incrementPotatoBtn = document.getElementById("potato-increment-btn");
+const potatoesPerSec = document.getElementById("pps");
 const upgradesWrapper = document.getElementById("upgrades-wrapper");
 const announcements = document.getElementById("announcements");
-const showCookieUpgrades = document.getElementById("cookie-upgrades-btn");
+const showPotatoUpgrades = document.getElementById("potato-upgrades-btn");
 const upgrade = document.getElementById("upgrade");
 const upgradeContainer = document.getElementById("upgrades-container");
 const audioBtn = document.getElementById("audio");
 const audioOn = document.getElementById("audio-on");
 const audioPop = document.getElementById("audio-pop");
+const potatoImg = document.getElementById("potato");
 
+let timeoutId;
 // Make annoucement disapear after set amount of time
 // fix bug with audio icon
 
 const i = document.createElement("i");
 i.classList = "fa-solid fa-volume-xmark";
 
-// Get data from local storage, if null create cookiedata object
-let cookieData = JSON.parse(localStorage.getItem("cookieGameData")) || {
-  totalCookies: 0,
-  cookieClickValue: 1,
-  cookiesPerSec: 1,
+// Get data from local storage, if null create potatoData object
+let potatoData = JSON.parse(localStorage.getItem("potatoGameData")) || {
+  totalPotatoes: 0,
+  potatoClickValue: 1,
+  potatoesPerSec: 1,
   audioOn: true,
 };
 
 // Save game state
 const saveGameState = () => {
-  localStorage.setItem("cookieGameData", JSON.stringify(cookieData));
+  localStorage.setItem("potatoGameData", JSON.stringify(potatoData));
 };
 
 // play audio
 const playAudio = () => {
-  if (cookieData.audioOn) {
-    console.log(cookieData.audioOn);
+  if (potatoData.audioOn) {
+    console.log(potatoData.audioOn);
     audioPop.currentTime = 0;
     audioPop.play();
   }
 };
 
 // Callback for setInterval
-const incrementTotalCookies = () => {
-  cookieData.totalCookies += cookieData.cookiesPerSec;
-  totalCookiesDisplay.textContent = `Total Cookies: ${cookieData.totalCookies}`;
-  displayCookiesPerSec();
+const incrementTotalPotatoes = () => {
+  potatoData.totalPotatoes += potatoData.potatoesPerSec;
+  totalPotatoesDisplay.textContent = `Total Potatoes: ${potatoData.totalPotatoes}`;
+  displayPotatoesPerSecond();
   saveGameState();
+};
+
+const changeImageDelay = () => {
+  potatoImg.src = "./assets/images/suprised-potatoe.png";
+  clearTimeout(timeoutId); // cancels previous time out, spamming button clicks doesn't mess up change the img src
+  setTimeout(() => {
+    potatoImg.src = "./assets/images/angry-potatoe.png";
+  }, 400);
 };
 
 // Callback for incrementBtn event listener
 const incrementBtnHandler = () => {
-  cookieData.totalCookies += cookieData.cookieClickValue;
+  potatoData.totalPotatoes += potatoData.potatoClickValue;
   saveGameState();
-  totalCookiesDisplay.textContent = `Total Cookies: ${cookieData.totalCookies}`;
+  totalPotatoesDisplay.textContent = `Total Cookies: ${potatoData.totalPotatoes}`;
   playAudio();
+  changeImageDelay();
 };
 
 // Callback for resetBtn event listener
 const resetBtnHandler = () => {
   localStorage.clear();
-  cookieData = {
-    totalCookies: 0,
-    cookieClickValue: 1,
-    cookiesPerSec: 1,
+  potatoData = {
+    totalPotatoes: 0,
+    potatoClickValue: 1,
+    potatoesPerSec: 1,
   };
   announcements.textContent = "";
 };
@@ -77,22 +88,22 @@ const audioHandler = () => {
   if (audioOn.parentElement === audioBtn) {
     audioBtn.removeChild(audioOn);
     audioBtn.appendChild(i);
-    cookieData.audioOn = false;
+    potatoData.audioOn = false;
     saveGameState();
   } else {
     audioBtn.removeChild(i);
     audioBtn.appendChild(audioOn);
-    cookieData.audioOn = true;
+    potatoData.audioOn = true;
     saveGameState();
   }
 };
 
 // Set Interval
-setInterval(incrementTotalCookies, 1000);
+setInterval(incrementTotalPotatoes, 1000);
 
-// Display cookies per second
-const displayCookiesPerSec = () => {
-  cookiesPerSec.textContent = `Cookies Per Sec: ${cookieData.cookiesPerSec}`;
+// Display potatoes per second
+const displayPotatoesPerSecond = () => {
+  potatoesPerSec.textContent = `Potatoes Per Sec: ${potatoData.potatoesPerSec}`;
 };
 
 // Fetch data from API
@@ -120,7 +131,7 @@ upgrades.forEach((element, index) => {
   upgradeContainer.appendChild(div);
   const namePara = document.createElement("p");
   const costPara = document.createElement("p");
-  const cookieValueUpgrade = document.createElement("p");
+  const PotatoValueUpgrade = document.createElement("p");
   const buyBtn = document.createElement("button");
 
   buyBtn.setAttribute("data-index", index);
@@ -128,11 +139,11 @@ upgrades.forEach((element, index) => {
   div.setAttribute("id", element.id);
 
   namePara.textContent = `${element.name}`;
-  costPara.textContent = `Cost ${element.cost} Cookies`;
-  cookieValueUpgrade.textContent = `Increases CPS by ${element.increase}`;
+  costPara.textContent = `Cost ${element.cost} Potatoes`;
+  PotatoValueUpgrade.textContent = `Increases PPS by ${element.increase}`;
   buyBtn.textContent = "Buy upgrade";
 
-  div.append(namePara, costPara, cookieValueUpgrade, buyBtn);
+  div.append(namePara, costPara, PotatoValueUpgrade, buyBtn);
 });
 
 const buyUpgrade = () => {
@@ -140,14 +151,14 @@ const buyUpgrade = () => {
   buyBtns.forEach((element) => {
     element.addEventListener("click", (e) => {
       const { name, cost, increase } = upgrades[element.dataset.index];
-      if (cookieData.totalCookies < cost) {
+      if (potatoData.totalPotatoes < cost) {
         announcements.textContent =
-          "You do not have enough cookies, to buy this upgrade....work harder!";
+          "You do not have enough potatoes, to buy this upgrade....work harder!";
       } else {
         announcements.textContent = `You have activated ${name}`;
-        cookieData.totalCookies -= cost;
-        cookieData.cookieClickValue += increase;
-        cookieData.cookiesPerSec += increase;
+        potatoData.totalPotatoes -= cost;
+        potatoData.potatoClickValue += increase;
+        potatoData.potatoesPerSec += increase;
         saveGameState();
       }
     });
@@ -157,6 +168,6 @@ buyUpgrade();
 
 // Event listeners
 audioBtn.addEventListener("click", audioHandler);
-incrementCookieBtn.addEventListener("click", incrementBtnHandler);
+incrementPotatoBtn.addEventListener("click", incrementBtnHandler);
 resetBtn.addEventListener("click", resetBtnHandler);
-showCookieUpgrades.addEventListener("click", showUpgrades);
+showPotatoUpgrades.addEventListener("click", showUpgrades);
