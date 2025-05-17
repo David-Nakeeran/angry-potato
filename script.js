@@ -14,7 +14,6 @@ const audioPop = document.getElementById("audio-pop");
 const potatoImg = document.getElementById("potato");
 
 let timeoutId;
-// Make annoucement disapear after set amount of time
 // fix bug with audio icon
 
 const i = document.createElement("i");
@@ -45,7 +44,7 @@ const playAudio = () => {
 // Callback for setInterval
 const incrementTotalPotatoes = () => {
   potatoData.totalPotatoes += potatoData.potatoesPerSec;
-  totalPotatoesDisplay.textContent = `Total Potatoes: ${potatoData.totalPotatoes}`;
+  totalPotatoesDisplay.innerHTML = `Total Potatoes: <span class="highlight">${potatoData.totalPotatoes}</span>`;
   displayPotatoesPerSecond();
   saveGameState();
 };
@@ -62,7 +61,7 @@ const changeImageDelay = () => {
 const incrementBtnHandler = () => {
   potatoData.totalPotatoes += potatoData.potatoClickValue;
   saveGameState();
-  totalPotatoesDisplay.textContent = `Total Cookies: ${potatoData.totalPotatoes}`;
+  totalPotatoesDisplay.innerHTML = `Total Potatoes: <span class="highlight">${potatoData.totalPotatoes}</span>`;
   playAudio();
   changeImageDelay();
 };
@@ -74,6 +73,7 @@ const resetBtnHandler = () => {
     totalPotatoes: 0,
     potatoClickValue: 1,
     potatoesPerSec: 1,
+    audioOn: true,
   };
   announcements.textContent = "";
 };
@@ -85,12 +85,12 @@ const showUpgrades = () => {
 
 // Callback handle audio
 const audioHandler = () => {
-  if (audioOn.parentElement === audioBtn) {
+  if (potatoData.audioOn) {
     audioBtn.removeChild(audioOn);
     audioBtn.appendChild(i);
     potatoData.audioOn = false;
     saveGameState();
-  } else {
+  } else if (!potatoData.audioOn) {
     audioBtn.removeChild(i);
     audioBtn.appendChild(audioOn);
     potatoData.audioOn = true;
@@ -101,9 +101,16 @@ const audioHandler = () => {
 // Set Interval
 setInterval(incrementTotalPotatoes, 1000);
 
+// Set Announcement text to empty string after delay
+const clearAnnouncementText = () => {
+  setTimeout(() => {
+    announcements.textContent = "";
+  }, 2000);
+};
+
 // Display potatoes per second
 const displayPotatoesPerSecond = () => {
-  potatoesPerSec.textContent = `Potatoes Per Sec: ${potatoData.potatoesPerSec}`;
+  potatoesPerSec.innerHTML = `Potatoes Per Sec: <span class="highlight">${potatoData.potatoesPerSec}</span>`;
 };
 
 // Fetch data from API
@@ -154,8 +161,10 @@ const buyUpgrade = () => {
       if (potatoData.totalPotatoes < cost) {
         announcements.textContent =
           "You do not have enough potatoes, to buy this upgrade....work harder!";
+        clearAnnouncementText();
       } else {
         announcements.textContent = `You have activated ${name}`;
+        clearAnnouncementText();
         potatoData.totalPotatoes -= cost;
         potatoData.potatoClickValue += increase;
         potatoData.potatoesPerSec += increase;
