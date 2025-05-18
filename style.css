@@ -262,6 +262,6 @@ header button {
   .upgrades-wrapper {
     margin: 0 auto;
     min-width: none;
-    max-width: 1023px;
+    max-width: 900px;
   }
 }
