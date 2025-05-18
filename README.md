@@ -4,7 +4,7 @@ Angry Potato game built using HTML, CSS and JavaScript.
 
 ## Live Demo
 
-<!-- [Image Gallery](https://david-nakeeran.github.io/week-02-assignment/) -->
+[Angry Potato](https://david-nakeeran.github.io/angry-potato/)
 
 ## Overview
 
