@@ -35,6 +35,10 @@ h1 {
   text-transform: uppercase;
 }
 
+.intruct-para {
+  font-size: 1.1rem;
+}
+
 p {
   margin-bottom: 0.75rem;
 }
@@ -135,6 +139,10 @@ footer {
 /* Buttons */
 button {
   cursor: pointer;
+}
+
+header button {
+  margin-bottom: 2.5em;
 }
 
 .audio {
