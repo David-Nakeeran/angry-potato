@@ -29,6 +29,7 @@ const potatoNames = [
 
 let timeoutId;
 
+// Font Awesome Icon audio muted (should be popped in a function)
 const i = document.createElement("i");
 i.classList = "fa-solid fa-volume-xmark";
 
