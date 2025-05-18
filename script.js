@@ -13,6 +13,20 @@ const audioOn = document.getElementById("audio-on");
 const audioPop = document.getElementById("audio-pop");
 const potatoImg = document.getElementById("potato");
 
+// potato names
+const potatoNames = [
+  "Auto-Clicker",
+  "Convection Oven",
+  "Fan Assisted Oven",
+  "Scorch And Sizzle",
+  "Magma Maestro",
+  "The Furnace",
+  "Forge Of Flavours",
+  "Bake Master 3000",
+  "The Potato Portal",
+  "God of Potatoes",
+];
+
 let timeoutId;
 
 const i = document.createElement("i");
@@ -56,7 +70,7 @@ const incrementTotalPotatoes = () => {
 
 const changeImageDelay = () => {
   potatoImg.src = "./assets/images/suprised-potatoe.png";
-  clearTimeout(timeoutId); // cancels previous time out, spamming button clicks doesn't mess up change the img src
+  clearTimeout(timeoutId); // cancels previous time out, spamming button clicks doesn't mess up changing img src
   setTimeout(() => {
     potatoImg.src = "./assets/images/angry-potatoe.png";
   }, 400);
@@ -124,7 +138,9 @@ const getData = async () => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      console.error(`HTTP status code: ${response.status}`);
+      console.error(
+        `Error fetching data, HTTP status code: ${response.status}`
+      );
     }
     return response.json();
   } catch (error) {
@@ -136,31 +152,33 @@ const getData = async () => {
 const upgrades = await getData();
 
 // Loop through fetched data, create upgrade elements
-upgrades.forEach((element, index) => {
-  const div = document.createElement("div");
-  div.setAttribute("class", "upgrade");
-  div.setAttribute("id", "upgrade");
-  upgradeContainer.appendChild(div);
-  const namePara = document.createElement("p");
-  const costPara = document.createElement("p");
-  const PotatoValueUpgrade = document.createElement("p");
-  const buyBtn = document.createElement("button");
+const createPotatoUpgradeElements = () => {
+  upgrades.forEach((element, index) => {
+    const div = document.createElement("div");
+    div.setAttribute("class", "upgrade");
+    div.setAttribute("id", "upgrade");
+    upgradeContainer.appendChild(div);
+    const namePara = document.createElement("p");
+    const costPara = document.createElement("p");
+    const PotatoValueUpgrade = document.createElement("p");
+    const buyBtn = document.createElement("button");
 
-  buyBtn.setAttribute("data-index", index);
-  buyBtn.classList.add("buy-btn");
-  div.setAttribute("id", element.id);
+    buyBtn.setAttribute("data-index", index);
+    buyBtn.classList.add("buy-btn");
+    div.setAttribute("id", element.id);
 
-  namePara.textContent = `${element.name}`;
-  costPara.textContent = `Cost ${element.cost} Potatoes`;
-  PotatoValueUpgrade.textContent = `Increases PPS by ${element.increase}`;
-  buyBtn.textContent = "Buy upgrade";
+    namePara.textContent = potatoNames[index];
+    costPara.textContent = `Cost ${element.cost} Potatoes`;
+    PotatoValueUpgrade.textContent = `Increases PPS by ${element.increase}`;
+    buyBtn.textContent = "Buy upgrade";
 
-  div.append(namePara, costPara, PotatoValueUpgrade, buyBtn);
-});
+    div.append(namePara, costPara, PotatoValueUpgrade, buyBtn);
+  });
+};
 
 const buyUpgrade = () => {
   const buyBtns = document.querySelectorAll("[data-index]");
-  buyBtns.forEach((element) => {
+  buyBtns.forEach((element, index) => {
     element.addEventListener("click", (e) => {
       const { name, cost, increase } = upgrades[element.dataset.index];
       if (potatoData.totalPotatoes < cost) {
@@ -168,7 +186,7 @@ const buyUpgrade = () => {
           "You do not have enough potatoes, to buy this upgrade....work harder!";
         clearAnnouncementText();
       } else {
-        announcements.textContent = `You have activated ${name}`;
+        announcements.textContent = `You have activated ${potatoNames[index]}`;
         clearAnnouncementText();
         potatoData.totalPotatoes -= cost;
         potatoData.potatoClickValue += increase;
@@ -179,6 +197,7 @@ const buyUpgrade = () => {
   });
 };
 loadAudioIconPref();
+createPotatoUpgradeElements();
 buyUpgrade();
 
 // Event listeners
